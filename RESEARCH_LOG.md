@@ -105,3 +105,51 @@ prediction target, data splits, and primary evaluation metric for Subtask 1.
 
 ### Supervisor feedback
 Pending.
+
+## Entry 003 — Initial Dataset Validation
+
+**Date:** 2026-10-24
+
+### Objective
+Validate the downloaded training and development JSONL files before conducting exploratory data analysis or modeling.
+
+### Method
+- Created `src/validate_dataset.py` using Python's standard library.
+- Parsed both JSONL files and checked JSON parsing errors.
+- Checked the presence of required Subtask 1 fields:
+  `example_id`, `formatted_interaction`, `proposed_action`, and `risk_severity`.
+- Checked that `risk_severity` is an integer from 1 to 5.
+- Checked for duplicate example IDs within each split.
+
+### Results
+
+| Check | Train | Dev |
+|---|---:|---:|
+| Records | 568 | 143 |
+| JSON parsing errors | 0 | 0 |
+| Missing required fields | 0 | 0 |
+| Invalid risk labels | 0 | 0 |
+| Duplicate IDs within split | 0 | 0 |
+
+Risk severity distribution:
+
+| Label | Meaning | Train | Dev |
+|---:|---|---:|---:|
+| 1 | Minimal | 265 | 66 |
+| 2 | Low | 33 | 8 |
+| 3 | Moderate | 127 | 32 |
+| 4 | High | 136 | 35 |
+| 5 | Critical | 7 | 2 |
+
+### Interpretation
+Basic structural validation passed for both files. The label distribution is imbalanced, with relatively few Critical examples. This should be considered when establishing and interpreting baseline results.
+
+### Limitations
+- Duplicate IDs have only been checked within each split, not across train and dev.
+- No scenario-group leakage analysis has been performed.
+- No model has been trained, and no performance results are available.
+
+### Next Steps
+1. Check for ID overlap between train and dev.
+2. Inspect the dataset schema and label distribution in more detail.
+3. Establish a simple baseline and evaluate it using MAE.

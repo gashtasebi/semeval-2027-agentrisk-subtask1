@@ -247,3 +247,34 @@ Neither baseline uses the interaction text or proposed action. Both make the sam
 1. Keep both baseline results for future comparisons.
 2. Check whether a simple text-based method can improve the MAE.
 3. Continue using the official train and dev splits for evaluation.
+
+## Entry 007 — Risk Label Distribution
+
+**Date:** 2026-10-24
+
+### Objective
+Check how the five risk levels are distributed in the train and dev sets.
+
+### Work performed
+- Created `src/agentrisk/analyze_labels.py`.
+- Counted the examples for each risk level.
+- Calculated the percentage of each label in both splits.
+
+### Results
+- Train: 568 examples.
+- Dev: 143 examples.
+- Risk level 1 is the most common label in both splits, at about 46%.
+- Risk level 2 accounts for about 6% of each split.
+- Risk level 5 is rare, with 7 train examples and 2 dev examples.
+- The label distributions are similar across the two splits.
+
+### What this means
+The dataset has an uneven label distribution. In particular, there are very few examples of risk level 5. This is worth keeping in mind when comparing models.
+
+### Limitations
+This analysis only looks at label counts and percentages. It does not explain why examples receive their labels or measure model performance for each risk level.
+
+### Next steps
+1. Keep the label distribution results for later analysis.
+2. Evaluate future models using MAE and inspect errors across risk levels.
+3. Continue with a simple text-based baseline after documenting this analysis.

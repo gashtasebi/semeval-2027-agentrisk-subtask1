@@ -215,3 +215,35 @@ This is a very simple baseline. It does not use the interaction text or the prop
 1. Keep this result as the reference for later experiments.
 2. Try another simple baseline and compare its MAE on the same dev set.
 3. Start testing a model that uses the interaction text.
+
+## Entry 006 — Comparing Mean and Median Baselines
+
+**Date:** 2026-10-24
+
+### Objective
+Compare two simple baselines for Subtask 1.
+
+### Work performed
+- Created `src/agentrisk/baseline_mean.py`.
+- Used the mean training label as a constant prediction for every dev example.
+- Compared the result with the median baseline.
+- Ran the automated tests again.
+
+### Results
+- Training examples: 568
+- Dev examples: 143
+- Mean training label: 2.272887
+- Mean baseline MAE: 1.226325
+- Median baseline MAE: 1.216783
+- Automated tests: 4 passed
+
+### What this means
+The median baseline had a slightly lower MAE than the mean baseline on the dev set. For now, the median baseline is our stronger reference result.
+
+### Limitations
+Neither baseline uses the interaction text or proposed action. Both make the same prediction for every dev example.
+
+### Next steps
+1. Keep both baseline results for future comparisons.
+2. Check whether a simple text-based method can improve the MAE.
+3. Continue using the official train and dev splits for evaluation.

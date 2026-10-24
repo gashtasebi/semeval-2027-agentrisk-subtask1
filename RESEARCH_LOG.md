@@ -153,3 +153,34 @@ Basic structural validation passed for both files. The label distribution is imb
 1. Check for ID overlap between train and dev.
 2. Inspect the dataset schema and label distribution in more detail.
 3. Establish a simple baseline and evaluate it using MAE.
+## Entry 004 — Split and Scenario-Group Validation
+
+**Date:** 2026-10-24
+
+### Objective
+Verify that the official split manifest matches the downloaded data and that scenario groups do not overlap between train and dev.
+
+### Method
+- Inspected `data/metadata/split_manifest.jsonl`.
+- Created and ran `src/validate_splits.py`.
+- Checked manifest JSON parsing, required fields, duplicate IDs, split assignments, and scenario-group overlap.
+
+### Results
+- Manifest records: 711; unique IDs: 711; duplicate IDs: 0.
+- Train records: 568; dev records: 143.
+- Train and dev IDs missing from the manifest: 0.
+- Split assignment mismatches: 0.
+- Manifest IDs absent from train/dev: 0.
+- Train scenario groups: 302.
+- Dev scenario groups: 95.
+- Scenario groups shared between train and dev: 0.
+- Unexpected split values: none.
+- The validation script completed successfully.
+
+### Interpretation
+The downloaded train/dev files are consistent with the split manifest. No example-ID overlap or scenario-group overlap was found between the two splits. This supports the integrity of the provided split assignment, but does not rule out every possible form of data leakage.
+
+### Next Steps
+1. Review label distribution and establish a simple MAE baseline.
+2. Keep the official split fixed for baseline evaluation.
+3. Document modeling decisions and results before drawing conclusions.

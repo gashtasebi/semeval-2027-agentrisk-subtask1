@@ -184,3 +184,34 @@ The downloaded train/dev files are consistent with the split manifest. No exampl
 1. Review label distribution and establish a simple MAE baseline.
 2. Keep the official split fixed for baseline evaluation.
 3. Document modeling decisions and results before drawing conclusions.
+
+## Entry 005 — First Baseline Experiment
+
+**Date:** 2026-10-24
+
+### Objective
+Run a simple first experiment to get a reference score for Subtask 1.
+
+### Work performed
+- Created `src/agentrisk/baseline_median.py`.
+- Used the median risk label in the training set as the prediction for every dev example.
+- Calculated MAE on the official dev split.
+- Added four automated tests for the MAE calculation.
+
+### Results
+- Training examples: 568
+- Dev examples: 143
+- Median training label: 2
+- Dev MAE: 1.216783
+- Automated tests: 4 passed
+
+### What this means
+The baseline predicts risk level 2 for every dev example. Its MAE is 1.216783, which gives us a starting point to compare with later models.
+
+### Limitations
+This is a very simple baseline. It does not use the interaction text or the proposed action, so it cannot make different predictions for different examples.
+
+### Next steps
+1. Keep this result as the reference for later experiments.
+2. Try another simple baseline and compare its MAE on the same dev set.
+3. Start testing a model that uses the interaction text.
